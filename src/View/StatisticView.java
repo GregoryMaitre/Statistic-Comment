@@ -1,8 +1,10 @@
 package View;
 
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
 import java.util.Vector;
 
+import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,6 +17,7 @@ import javax.swing.table.DefaultTableModel;
 
 import Common.Constants;
 import Controller.LoaderOpinions;
+import Controller.SaveFalsePositive;
 import Controller.SaveMetaData;
 import Model.Comment;
 import Model.Evaluation;
@@ -34,6 +37,7 @@ public class StatisticView extends JFrame {
 	private DefaultTableModel tableModel;
 	private Evaluation evaluation;
 	private SaveMetaData saveMetaData;
+	private SaveFalsePositive saveFalsePositive;
 
 	/**
 	 * Create the frame.
@@ -43,6 +47,7 @@ public class StatisticView extends JFrame {
 		this.resultsClassifyComments = resultsClassifyComments;
 		LoaderOpinions loaderOpinions = new LoaderOpinions(this);
 		saveMetaData = new SaveMetaData();
+		saveFalsePositive = new SaveFalsePositive();
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,6 +66,10 @@ public class StatisticView extends JFrame {
 		JMenuItem mntmExportMetadata = new JMenuItem("Export MetaData");
 		mntmExportMetadata.addActionListener(saveMetaData);
 		mnFile.add(mntmExportMetadata);
+		
+		JMenuItem mntmExportFalsePositive = new JMenuItem("Export False Positive");
+		mntmExportFalsePositive.addActionListener(saveFalsePositive);
+		mnFile.add(mntmExportFalsePositive);
 		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,6 +92,7 @@ public class StatisticView extends JFrame {
 		this.evaluation = new Evaluation(resultsClassifyComments, resultOpinionExtractor);
 		evaluation.eval();
 		saveMetaData.setEvaluation(evaluation);
+		saveFalsePositive.setEvaluation(evaluation);
 		printResults();
 	}
 
@@ -118,5 +128,13 @@ public class StatisticView extends JFrame {
 			
 		tableModel.setDataVector(dataList, header);
 		
+	}
+	private class SwingAction extends AbstractAction {
+		public SwingAction() {
+			putValue(NAME, "SwingAction");
+			putValue(SHORT_DESCRIPTION, "Some short description");
+		}
+		public void actionPerformed(ActionEvent e) {
+		}
 	}
 }

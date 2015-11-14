@@ -102,9 +102,9 @@ public class Evaluation {
 		double allOpinionsSize = positivePositive.size() + positiveNeutral.size() + positiveNegative.size()
 				+ neutralNegative.size() + neutralNeutral.size() + neutralNegative.size() + negativeNegative.size()
 				+ negativeNeutral.size() + negativePositive.size();
-		
+
 		allOpinionsSize /= 100.0;
-		
+
 		System.out.println(allOpinionsSize);
 
 		String[] header = { "Classify\\Opinion", "Positive", "Neutral", "Negative" };
@@ -124,16 +124,15 @@ public class Evaluation {
 		result.add(res3);
 		return result;
 	}
-	
+
 	public List<String[]> getResultsWithoutNeutral() {
 		ArrayList<String[]> result = new ArrayList<String[]>();
 
-		double allOpinionsSize = positivePositive.size() + positiveNegative.size()
-				 + negativeNegative.size()
-				 + negativePositive.size();
-		
+		double allOpinionsSize = positivePositive.size() + positiveNegative.size() + negativeNegative.size()
+				+ negativePositive.size();
+
 		allOpinionsSize /= 100.0;
-		
+
 		System.out.println(allOpinionsSize);
 
 		String[] header = { "Classify\\Opinion", "Positive", "Negative" };
@@ -146,5 +145,17 @@ public class Evaluation {
 		result.add(res1);
 		result.add(res3);
 		return result;
+	}
+
+	public List<String[]> getFalsePositive() {
+		ArrayList<String[]> comments = new ArrayList<String[]>();
+		String[] header = { "ID", "Comment" };
+		comments.add(header);
+		for (int id : negativePositive) {
+			Comment comment = resultsClassifyComments.get(id);
+			String[] res = {Integer.toString(comment.id), comment.message};
+			comments.add(res);
+		}
+		return comments;
 	}
 }

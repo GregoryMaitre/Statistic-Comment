@@ -1,6 +1,8 @@
 package Controller;
 
 
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 
 import Model.Comment;
@@ -28,6 +30,10 @@ public class JSONManager {
 	
 	public String toJson(Comment comment) {
 		return gson.toJson(comment);
+	}
+	
+	public String toJson(ArrayList<Comment> comments) {
+		return gson.toJson(comments);
 	}
 	
 	public Opinion[] toOpinions(String json) {
