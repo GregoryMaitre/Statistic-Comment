@@ -117,11 +117,13 @@ public class Evaluation {
 		String[] res3 = { "Negative", Double.toString((negativePositive.size() / allOpinionsSize)) + " %",
 				Double.toString((negativeNeutral.size() / allOpinionsSize)) + " %",
 				Double.toString((negativeNegative.size() / allOpinionsSize)) + " %" };
+		String[] res4 = {"","","","", Double.toString((positivePositive.size() + neutralNeutral.size() + negativeNegative.size()) / allOpinionsSize)};
 
 		result.add(header);
 		result.add(res1);
 		result.add(res2);
 		result.add(res3);
+		result.add(res4);
 		return result;
 	}
 

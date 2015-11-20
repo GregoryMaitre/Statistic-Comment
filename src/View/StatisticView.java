@@ -1,10 +1,8 @@
 package View;
 
 import java.awt.BorderLayout;
-import java.awt.event.ActionEvent;
 import java.util.Vector;
 
-import javax.swing.AbstractAction;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -128,13 +126,5 @@ public class StatisticView extends JFrame {
 			
 		tableModel.setDataVector(dataList, header);
 		
-	}
-	private class SwingAction extends AbstractAction {
-		public SwingAction() {
-			putValue(NAME, "SwingAction");
-			putValue(SHORT_DESCRIPTION, "Some short description");
-		}
-		public void actionPerformed(ActionEvent e) {
-		}
 	}
 }
