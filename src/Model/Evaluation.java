@@ -117,7 +117,8 @@ public class Evaluation {
 		String[] res3 = { "Negative", Double.toString((negativePositive.size() / allOpinionsSize)) + " %",
 				Double.toString((negativeNeutral.size() / allOpinionsSize)) + " %",
 				Double.toString((negativeNegative.size() / allOpinionsSize)) + " %" };
-		String[] res4 = {"","","","", Double.toString((positivePositive.size() + neutralNeutral.size() + negativeNegative.size()) / allOpinionsSize)};
+		String[] res4 = { "", "", "", Double.toString(allOpinionsSize * 100.0), Double.toString(
+				(positivePositive.size() + neutralNeutral.size() + negativeNegative.size()) / allOpinionsSize) };
 
 		result.add(header);
 		result.add(res1);
@@ -155,9 +156,17 @@ public class Evaluation {
 		comments.add(header);
 		for (int id : negativePositive) {
 			Comment comment = resultsClassifyComments.get(id);
-			String[] res = {Integer.toString(comment.id), comment.message};
+			String[] res = { Integer.toString(comment.id), comment.message };
 			comments.add(res);
 		}
 		return comments;
+	}
+
+	public String getMainResults() {
+		double allOpinionsSize = positivePositive.size() + positiveNeutral.size() + positiveNegative.size()
+				+ neutralNegative.size() + neutralNeutral.size() + neutralNegative.size() + negativeNegative.size()
+				+ negativeNeutral.size() + negativePositive.size();
+		return Double.toString(
+				(positivePositive.size() + neutralNeutral.size() + negativeNegative.size()) / allOpinionsSize);
 	}
 }

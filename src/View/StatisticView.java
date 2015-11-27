@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
 import Common.Constants;
+import Controller.LoaderAllOpinions;
 import Controller.LoaderOpinions;
 import Controller.SaveFalsePositive;
 import Controller.SaveMetaData;
@@ -36,6 +37,7 @@ public class StatisticView extends JFrame {
 	private Evaluation evaluation;
 	private SaveMetaData saveMetaData;
 	private SaveFalsePositive saveFalsePositive;
+	private LoaderAllOpinions loaderAll;
 
 	/**
 	 * Create the frame.
@@ -46,6 +48,7 @@ public class StatisticView extends JFrame {
 		LoaderOpinions loaderOpinions = new LoaderOpinions(this);
 		saveMetaData = new SaveMetaData();
 		saveFalsePositive = new SaveFalsePositive();
+		loaderAll = new LoaderAllOpinions(this);
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -69,6 +72,10 @@ public class StatisticView extends JFrame {
 		mntmExportFalsePositive.addActionListener(saveFalsePositive);
 		mnFile.add(mntmExportFalsePositive);
 		
+		JMenuItem mntmLoadAndExport = new JMenuItem("Load and Export all");
+		mntmLoadAndExport.addActionListener(loaderAll);
+		mnFile.add(mntmLoadAndExport);
+		
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BorderLayout(0, 0));
@@ -91,6 +98,7 @@ public class StatisticView extends JFrame {
 		evaluation.eval();
 		saveMetaData.setEvaluation(evaluation);
 		saveFalsePositive.setEvaluation(evaluation);
+		loaderAll.setEvaluation(evaluation);
 		printResults();
 	}
 
